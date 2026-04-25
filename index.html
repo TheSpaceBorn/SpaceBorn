@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Space Born — Rise of Kingdoms Restart</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  #hero {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 100px 32px 80px; overflow: hidden;
+  }
+
+  .hero-eyebrow { font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 5px; color: var(--accent3); text-transform: uppercase; margin-bottom: 28px; opacity: 0; animation: fadeUp 0.8s 0.3s forwards; }
+
+  .hero-title { font-family: 'Orbitron', monospace; font-weight: 900; font-size: clamp(60px, 11vw, 130px); line-height: 1; letter-spacing: 10px; text-transform: uppercase; background: linear-gradient(140deg, #e8eeff 0%, #4fc3f7 35%, #7c4dff 70%, #e040fb 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.9s 0.5s forwards; }
+
+  .hero-subtitle { font-family: 'Orbitron', monospace; font-size: clamp(11px, 1.6vw, 15px); letter-spacing: 7px; color: var(--star-dim); text-transform: uppercase; margin-bottom: 52px; opacity: 0; animation: fadeUp 0.8s 0.7s forwards; }
+
+  .hero-blurb { max-width: 520px; font-size: 18px; line-height: 1.7; color: rgba(232,238,255,0.55); font-weight: 300; margin-bottom: 52px; opacity: 0; animation: fadeUp 0.8s 0.9s forwards; }
+
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; opacity: 0; animation: fadeUp 0.8s 1.1s forwards; }
+
+  .btn-discord { display: inline-block; padding: 13px 32px; font-family: 'Share Tech Mono', monospace; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; border-radius: 2px; background: #5865F2; color: #fff; border: none; box-shadow: 0 0 24px rgba(88,101,242,0.3); transition: all 0.25s; }
+  .btn-discord:hover { background: #4752c4; transform: translateY(-2px); box-shadow: 0 0 40px rgba(88,101,242,0.45); }
+
+  /* ── BLACK HOLE ── */
+  .bh { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 700px; height: 700px; pointer-events: none; z-index: -1; }
+  .bh-ring { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(79,195,247,0.05); animation: spin 35s linear infinite; }
+  .bh-ring:nth-child(2) { inset: 50px; border-color: rgba(124,77,255,0.07); animation-duration: 22s; animation-direction: reverse; }
+  .bh-ring:nth-child(3) { inset: 110px; border-color: rgba(224,64,251,0.05); animation-duration: 50s; }
+  .bh-ring:nth-child(4) { inset: 180px; border-color: rgba(79,195,247,0.04); animation-duration: 70s; animation-direction: reverse; }
+  .bh-accretion { position: absolute; inset: 130px; border-radius: 50%; background: conic-gradient(from 0deg, rgba(79,195,247,0.03), rgba(224,64,251,0.09), rgba(255,215,64,0.05), rgba(79,195,247,0.03)); filter: blur(10px); animation: spin 9s linear infinite; }
+  .bh-core { position: absolute; inset: 210px; border-radius: 50%; background: radial-gradient(circle, #02020a 45%, rgba(10,13,46,0.6) 75%, transparent 100%); }
+
+  /* ── SCROLL ── */
+  .scroll-indicator { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 6px; opacity: 0; animation: fadeIn 1s 2s forwards; }
+  .scroll-indicator span { font-family: 'Share Tech Mono', monospace; font-size: 9px; letter-spacing: 3px; color: rgba(136,146,204,0.4); text-transform: uppercase; }
+  .scroll-line { width: 1px; height: 36px; background: linear-gradient(to bottom, rgba(79,195,247,0.5), transparent); animation: pulse 2s 2.2s infinite; }
+
+  /* ── NAV CARDS ── */
+  #subpages { position: relative; z-index: 1; padding: 0 64px 100px; max-width: 1240px; margin: 0 auto; }
+  .subpages-label { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 4px; color: rgba(136,146,204,0.35); text-transform: uppercase; text-align: center; margin-bottom: 40px; }
+
+  .nav-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+
+  .nav-card { display: block; text-decoration: none; background: rgba(13,21,69,0.5); border: 1px solid rgba(79,195,247,0.1); border-radius: 4px; padding: 32px 28px; position: relative; overflow: hidden; transition: all 0.3s; }
+  .nav-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; opacity: 0; transition: opacity 0.3s; }
+  .nav-card:hover { transform: translateY(-5px); border-color: rgba(79,195,247,0.25); background: rgba(13,21,69,0.65); }
+  .nav-card:hover::before { opacity: 1; }
+
+  .nav-card[data-color="blue"]::before   { background: linear-gradient(to right, #4fc3f7, #7c4dff); }
+  .nav-card[data-color="purple"]::before { background: linear-gradient(to right, #7c4dff, #e040fb); }
+  .nav-card[data-color="pink"]::before   { background: linear-gradient(to right, #e040fb, #ff4081); }
+  .nav-card[data-color="gold"]::before   { background: linear-gradient(to right, #ffd740, #ff9800); }
+  .nav-card[data-color="teal"]::before   { background: linear-gradient(to right, #1de9b6, #4fc3f7); }
+  .nav-card[data-color="green"]::before  { background: linear-gradient(to right, #69f0ae, #1de9b6); }
+  .nav-card[data-color="red"]::before    { background: linear-gradient(to right, #ff4081, #ff6d00); }
+
+  .nav-card-num { font-family: 'Share Tech Mono', monospace; font-size: 10px; letter-spacing: 3px; color: rgba(136,146,204,0.3); margin-bottom: 16px; text-transform: uppercase; }
+  .nav-card-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+  .nav-card h2 { font-family: 'Orbitron', monospace; font-weight: 600; font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: var(--star-white); margin-bottom: 8px; }
+  .nav-card p { font-size: 13px; color: rgba(232,238,255,0.42); line-height: 1.6; font-weight: 300; margin-bottom: 20px; }
+  .nav-card-arrow { font-family: 'Share Tech Mono', monospace; font-size: 11px; letter-spacing: 2px; color: var(--accent); text-transform: uppercase; display: flex; align-items: center; gap: 8px; transition: gap 0.2s; }
+  .nav-card:hover .nav-card-arrow { gap: 14px; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+  @keyframes pulse { 0%,100% { opacity: 0.2; transform: scaleY(0.8); } 50% { opacity: 0.7; transform: scaleY(1.2); } }
+
+  @media (max-width: 768px) {
+    .bh { width: 340px; height: 340px; }
+    #subpages { padding: 0 20px 80px; }
+  }
+</style>
+</head>
+<body>
+<canvas id="stars-canvas"></canvas>
+
+<nav>
+  <a href="index.html" class="nav-logo">SPACE<span>BORN</span></a>
+  <ul>
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li><a href="vision.html" class="nav-link">Vision</a></li>
+    <li><a href="leadership.html" class="nav-link">Leadership</a></li>
+    <li><a href="alliances.html" class="nav-link">Alliances</a></li>
+    <li><a href="info.html" class="nav-link">Info & Rules</a></li>
+    <li><a href="sellers.html" class="nav-link">RSS Sellers</a></li>
+    <li><a href="pilots.html" class="nav-link">Pilots</a></li>
+    <li><a href="join.html" class="nav-link">Join</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="bh">
+    <div class="bh-ring"></div>
+    <div class="bh-ring"></div>
+    <div class="bh-ring"></div>
+    <div class="bh-ring"></div>
+    <div class="bh-accretion"></div>
+    <div class="bh-core"></div>
+  </div>
+
+  <p class="hero-eyebrow">Rise of Kingdoms · Server Restart · Year Zero</p>
+  <h1 class="hero-title">Space Born</h1>
+  <p class="hero-subtitle">Kingdom Restart Project</p>
+  <p class="hero-blurb">A new civilization awakens at the edge of the cosmos. One kingdom. One vision. Built from the void — forged for dominance.</p>
+  <div class="hero-btns">
+    <a href="join.html" class="btn btn-primary">Join the Fleet</a>
+    <a href="https://discord.gg/y5XYSS6pvF" target="_blank" class="btn-discord">Discord</a>
+    <a href="vision.html" class="btn btn-outline">Our Vision</a>
+  </div>
+  <div class="scroll-indicator">
+    <span>Explore</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<section id="subpages">
+  <p class="subpages-label reveal">Navigate the Kingdom</p>
+  <div class="nav-cards">
+    <a href="vision.html" class="nav-card reveal" data-color="blue">
+      <p class="nav-card-num">01</p>
+      <span class="nav-card-icon">🌌</span>
+      <h2>Project Vision</h2>
+      <p>Our goals, KvK strategy, and the philosophy behind Space Born.</p>
+      <span class="nav-card-arrow">Enter &rarr;</span>
+    </a>
+    <a href="leadership.html" class="nav-card reveal" data-color="purple">
+      <p class="nav-card-num">02</p>
+      <span class="nav-card-icon">👑</span>
+      <h2>Leadership</h2>
+      <p>High Council, Low Council, voting system, and the chain of command.</p>
+      <span class="nav-card-arrow">Enter &rarr;</span>
+    </a>
+    <a href="alliances.html" class="nav-card reveal" data-color="pink">
+      <p class="nav-card-num">03</p>
+      <span class="nav-card-icon">⚔️</span>
+      <h2>Alliances</h2>
+      <p>Three main war guilds and three support alliances forming our fleet.</p>
+      <span class="nav-card-arrow">Enter &rarr;</span>
+    </a>
+    <a href="info.html" class="nav-card reveal" data-color="gold">
+      <p class="nav-card-num">04</p>
+      <span class="nav-card-icon">📡</span>
+      <h2>Info & Rules</h2>
+      <p>About Space Born, what makes us different, and kingdom laws.</p>
+      <span class="nav-card-arrow">Enter &rarr;</span>
+    </a>
+    <a href="sellers.html" class="nav-card reveal" data-color="teal">
+      <p class="nav-card-num">05</p>
+      <span class="nav-card-icon">📦</span>
+      <h2>RSS Sellers</h2>
+      <p>Verified resource sellers — zones, alliances, and prices listed.</p>
+      <span class="nav-card-arrow">Enter &rarr;</span>
+    </a>
+    <a href="pilots.html" class="nav-card reveal" data-color="green">
+      <p class="nav-card-num">06</p>
+      <span class="nav-card-icon">🚀</span>
+      <h2>Pilots</h2>
+      <p>Trusted verified pilots for KvK management, farming, and more.</p>
+      <span class="nav-card-arrow">Enter &rarr;</span>
+    </a>
+    <a href="join.html" class="nav-card reveal" data-color="red">
+      <p class="nav-card-num">07</p>
+      <span class="nav-card-icon">🌠</span>
+      <h2>Join the Fleet</h2>
+      <p>Ready to be part of Space Born? Get your spot and connect with leadership.</p>
+      <span class="nav-card-arrow">Enter &rarr;</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p class="f-logo">SPACE BORN</p>
+  <p>Rise of Kingdoms · Kingdom Restart Project</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

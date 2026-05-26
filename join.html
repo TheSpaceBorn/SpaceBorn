@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Join — Space Born</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.steps{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin-bottom:40px}
+.step{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px 20px;transition:border-color .2s}
+.step:hover{border-color:rgba(255,255,255,.13)}
+.step-num{font-family:var(--font-h);font-size:40px;font-weight:800;color:rgba(126,184,247,.12);line-height:1;margin-bottom:10px}
+.step h3{font-family:var(--font-h);font-size:14px;font-weight:700;color:var(--blue);margin-bottom:8px}
+.step p{font-size:13px;color:var(--text2);line-height:1.65}
+.discord-cta{
+  background:var(--surface);border:1px solid rgba(88,101,242,.3);
+  border-radius:var(--r);padding:48px 36px;text-align:center;
+  position:relative;overflow:hidden;margin-bottom:14px;
+}
+.discord-cta::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,#5865F2,transparent)}
+.discord-cta h3{font-family:var(--font-h);font-size:22px;font-weight:700;color:var(--text1);margin-bottom:10px}
+.discord-cta p{font-size:15px;color:var(--text2);max-width:440px;margin:0 auto 24px;line-height:1.7}
+.discord-url{font-family:var(--font-m);font-size:11px;color:rgba(88,101,242,.5);margin-bottom:22px}
+.recruit-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.rc{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.rc h4{font-family:var(--font-h);font-size:13px;font-weight:700;color:var(--text1);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.rc ul{list-style:none;padding:0}
+.rc li{font-size:13px;color:var(--text2);line-height:1.65;padding-left:14px;position:relative;margin-bottom:8px}
+.rc li::before{content:'›';position:absolute;left:0;font-weight:700}
+.rc.want li::before{color:var(--teal)}
+.rc.no li::before{color:var(--red)}
+@media(max-width:768px){.recruit-grid{grid-template-columns:1fr}.discord-cta{padding:32px 18px}}
+</style>
+</head>
+<body>
+<canvas id="stars-canvas"></canvas>
+<div id="site-nav"></div>
+<div class="page">
+  <div class="page-banner">
+    <p class="page-tag">07 — Recruitment</p>
+    <h1>Join the <em>Fleet</em></h1>
+    <p class="lead">The void is vast — but Space Born is building something permanent. Join at the start and shape the kingdom from day zero.</p>
+  </div>
+  <div class="page-content">
+    <div class="reveal">
+      <p class="sec-tag">How to Join</p>
+      <h2 class="sec-title">Your <em>Mission Briefing</em></h2>
+      <p class="sec-lead">Four steps to becoming part of the Space Born fleet.</p>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><div class="step-num">01</div><h3>Join Discord</h3><p>Click the link below and join our server. All kingdom communication happens there.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Register</h3><p>Post your IGN, kingdom, power, and march types in the #registration channel.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Get Assigned</h3><p>Leadership assigns you to the correct alliance tier based on your stats and goals.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Join Your Alliance</h3><p>Follow guidance from your R5, join your designated alliance, and start contributing.</p></div>
+    </div>
+    <hr class="div">
+    <div class="discord-cta reveal">
+      <h3>Space Born Discord</h3>
+      <p>War calls, server info, leadership announcements, RSS sellers, pilot listings — everything runs through here.</p>
+      <p class="discord-url" id="discord-url-show">discord.gg/y5XYSS6pvF</p>
+      <a id="join-discord" href="https://discord.gg/y5XYSS6pvF" target="_blank" class="btn btn-discord" style="font-size:15px;padding:13px 36px">Join Our Discord</a>
+    </div>
+    <hr class="div">
+    <div class="reveal">
+      <p class="sec-tag">Recruitment Criteria</p>
+      <h2 class="sec-title">Who We're <em>Looking For</em></h2>
+      <p class="sec-lead">Space Born is for dedicated players who want to be part of something real.</p>
+    </div>
+    <div class="recruit-grid reveal">
+      <div class="rc want">
+        <h4>We Want</h4>
+        <ul>
+          <li>Active players who log in daily during growth and KvK</li>
+          <li>Players who follow strategy and respond to war calls</li>
+          <li>Team-first mentality — no lone wolves</li>
+          <li>Experienced RoK players who understand the game</li>
+          <li>Discord-active members who stay informed</li>
+        </ul>
+      </div>
+      <div class="rc no">
+        <h4>Not a Fit If</h4>
+        <ul>
+          <li>You hit kingdom members without cause</li>
+          <li>You ignore war calls or go inactive during KvK</li>
+          <li>You leak kingdom information to outsiders</li>
+          <li>You're here to cause drama, not contribute</li>
+          <li>You refuse to follow the kingdom structure</li>
+        </ul>
+      </div>
+    </div>
+    <hr class="div">
+    <div class="reveal" style="text-align:center;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="index.html" class="btn btn-ghost">← Back to Home</a>
+    </div>
+  </div>
+</div>
+<footer><p class="f-logo">Space Born</p><p>Rise of Kingdoms · Kingdom Restart Project</p></footer>
+<script src="data.js"></script><script src="nav.js"></script><script src="main.js"></script>
+<script>
+  if(typeof SPACEBORN!=='undefined'){
+    const d=SPACEBORN.kingdom.discordLink;
+    document.getElementById('join-discord').href=d;
+    document.getElementById('discord-url-show').textContent=d.replace('https://','');
+  }
+</script>
+</body>
+</html>

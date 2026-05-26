@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leadership — Space Born</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.council-section{margin-bottom:52px}
+.council-hd{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.council-meta{font-family:var(--font-m);font-size:10px;color:var(--text3);letter-spacing:1px}
+.council-desc{font-size:15px;color:var(--text2);line-height:1.75;max-width:680px;margin-bottom:24px}
+.members-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.member-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px 14px;text-align:center;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+.member-card:hover{transform:translateY(-2px)}
+.hc .member-card:hover{border-color:rgba(126,184,247,.3)}
+.lc .member-card:hover{border-color:rgba(167,139,250,.3)}
+.member-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;opacity:0;transition:opacity .2s}
+.member-card:hover::after{opacity:1}
+.hc .member-card::after{background:linear-gradient(to right,transparent,var(--blue),transparent)}
+.lc .member-card::after{background:linear-gradient(to right,transparent,var(--violet),transparent)}
+.m-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-family:var(--font-m);font-size:10px;font-weight:700;letter-spacing:.5px}
+.hc .m-avatar{background:var(--blue-dim);border:1px solid rgba(126,184,247,.25);color:var(--blue)}
+.lc .m-avatar{background:var(--violet-dim);border:1px solid rgba(167,139,250,.25);color:var(--violet)}
+.m-role{font-family:var(--font-m);font-size:8px;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:5px}
+.m-name{font-family:var(--font-h);font-size:13px;font-weight:700;color:var(--text1)}
+.m-name.tbd{color:var(--text3);font-weight:500;font-style:italic;font-size:12px}
+.m-dept{font-size:11px;color:var(--text3);margin-top:3px}
+.auth-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px;margin-top:18px;position:relative;overflow:hidden}
+.auth-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--blue),transparent)}
+.auth-box h4{font-family:var(--font-m);font-size:10px;letter-spacing:1.5px;color:var(--blue);text-transform:uppercase;margin-bottom:14px}
+.auth-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.auth-icon{font-size:14px;flex-shrink:0;margin-top:1px}
+.auth-item p{font-size:14px;color:var(--text2);line-height:1.6}
+.auth-item strong{color:var(--text1);font-weight:600}
+.decision-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px}
+.decision-box h4{font-family:var(--font-m);font-size:10px;letter-spacing:1.5px;color:var(--violet);text-transform:uppercase;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.vote-row{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 16px;margin-bottom:8px;border-left:2px solid}
+.vote-row.b{border-left-color:var(--blue)}.vote-row.v{border-left-color:var(--violet)}.vote-row.r{border-left-color:var(--red)}
+.vote-n{font-family:var(--font-h);font-weight:800;font-size:20px;flex-shrink:0}
+.vote-row.b .vote-n{color:var(--blue)}.vote-row.v .vote-n{color:var(--violet)}.vote-row.r .vote-n{color:var(--red)}
+.vote-row p{font-size:13px;color:var(--text2);line-height:1.5}
+.vote-row strong{color:var(--text1)}
+.ensures{margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
+.ensures > p{font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:10px}
+.en-item{display:flex;gap:8px;align-items:center;margin-bottom:7px;font-size:13px;color:var(--text2)}
+.en-item::before{content:'✓';color:var(--teal);font-weight:700;font-size:11px}
+.roles-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.role-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.role-card h4{font-family:var(--font-h);font-size:13px;font-weight:700;color:var(--blue);margin-bottom:8px}
+.role-card > p{font-size:14px;color:var(--text2);line-height:1.65;margin-bottom:12px}
+.role-card ul{list-style:none;padding:0}
+.role-card li{font-size:13px;color:var(--text2);line-height:1.65;padding-left:13px;position:relative;margin-bottom:7px}
+.role-card li::before{content:'›';position:absolute;left:0;color:var(--blue);font-weight:700}
+@media(max-width:768px){.roles-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<canvas id="stars-canvas"></canvas><div id="site-nav"></div>
+<div class="page">
+  <div class="page-banner">
+    <p class="page-tag">02 — Leadership</p>
+    <h1>Command <em>Structure</em></h1>
+    <p class="lead">A structured chain of command designed to ensure fairness, efficiency, and long-term stability. Every level has a defined role — every decision follows a clear system of accountability.</p>
+  </div>
+  <div class="page-content">
+    <div class="council-section hc reveal">
+      <div class="council-hd">
+        <span class="badge badge-blue">High Council</span>
+        <span class="council-meta">4 Members · Tier 1 Command</span>
+      </div>
+      <p class="council-desc">The High Council represents the core leadership of the kingdom. They set long-term vision, oversee all departments and major decisions, and maintain balance, fairness, and stability.</p>
+      <div class="members-grid" id="hc-grid"></div>
+      <div class="auth-box">
+        <h4>Authority</h4>
+        <div class="auth-item"><span class="auth-icon">⚖️</span><p>Holds <strong>veto power</strong> over any decision</p></div>
+        <div class="auth-item"><span class="auth-icon">🛡️</span><p>Can <strong>stop or delay actions</strong> deemed harmful or unnecessary</p></div>
+        <div class="auth-item"><span class="auth-icon">🌌</span><p>Acts as the <strong>final safeguard</strong> for the kingdom's future</p></div>
+      </div>
+    </div>
+    <hr class="div">
+    <div class="council-section lc reveal">
+      <div class="council-hd">
+        <span class="badge badge-violet">Low Council</span>
+        <span class="council-meta">9 Members · Specialized Departments</span>
+      </div>
+      <p class="council-desc">Specialized leaders each responsible for a key area of the kingdom. They manage departments, execute plans, maintain day-to-day operations, and coordinate across leadership.</p>
+      <div class="members-grid" id="lc-grid"></div>
+    </div>
+    <hr class="div">
+    <div class="reveal"><p class="sec-tag">Governance</p><h2 class="sec-title">Decision <em>System</em></h2><p class="sec-lead">A two-tier voting process to ensure no decision is made impulsively.</p></div>
+    <div class="decision-box reveal">
+      <h4>Voting Requirements</h4>
+      <div class="vote-row b"><div class="vote-n">6/9</div><p><strong>Low Council votes</strong> required to initiate any major action</p></div>
+      <div class="vote-row v"><div class="vote-n">3/4</div><p><strong>High Council approval</strong> required for confirmation</p></div>
+      <div class="vote-row r"><div class="vote-n">VETO</div><p><strong>High Council retains the right</strong> to halt any decision at any stage</p></div>
+      <div class="ensures">
+        <p>This system ensures:</p>
+        <div class="en-item">No single person controls the kingdom</div>
+        <div class="en-item">Every action is reviewed, discussed, and justified</div>
+        <div class="en-item">Stability over impulsive decisions</div>
+      </div>
+    </div>
+    <hr class="div">
+    <div class="reveal"><p class="sec-tag">Execution Layer</p><h2 class="sec-title">Alliance <em>Leadership</em></h2><p class="sec-lead">R5s and Officers bridge the gap between kingdom command and frontline execution.</p></div>
+    <div class="roles-grid reveal">
+      <div class="role-card">
+        <h4>R5 Leadership</h4>
+        <p>Main & Support Alliances — responsible for alliance-level execution.</p>
+        <ul><li>Implement kingdom directives within alliances</li><li>Manage alliance activity, coordination, and discipline</li><li>Act as the bridge between leadership and members</li></ul>
+      </div>
+      <div class="role-card">
+        <h4>Officers</h4>
+        <p>Support R5s and departments in daily operations.</p>
+        <ul><li>Assist with coordination, communication, and enforcement</li><li>Help maintain activity and organization</li><li>Ensure members stay aligned with kingdom goals</li></ul>
+      </div>
+    </div>
+    <hr class="div">
+    <div class="reveal" style="text-align:center;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="alliances.html" class="btn btn-primary">View Alliances →</a>
+      <a href="index.html" class="btn btn-ghost">← Back to Home</a>
+    </div>
+  </div>
+</div>
+<footer><p class="f-logo">Space Born</p><p>Rise of Kingdoms · Kingdom Restart Project</p></footer>
+<script src="data.js"></script><script src="nav.js"></script><script src="main.js"></script>
+<script>
+function ini(r){return r.split(' ').map(w=>w[0]).join('').substring(0,3).toUpperCase()}
+function renderMembers(list,id,cls){
+  document.getElementById(id).innerHTML=list.map(m=>`
+    <div class="member-card">
+      <div class="m-avatar">${ini(m.role)}</div>
+      <p class="m-role">${m.role}</p>
+      <p class="m-name ${m.name==='TBD'?'tbd':''}">${m.name==='TBD'?'Open':m.name}</p>
+      ${m.dept?`<p class="m-dept">${m.dept}</p>`:''}
+    </div>`).join('');
+}
+renderMembers(SPACEBORN.highCouncil,'hc-grid','hc');
+renderMembers(SPACEBORN.lowCouncil,'lc-grid','lc');
+</script>
+</body></html>

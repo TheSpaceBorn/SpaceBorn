@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vision — Space Born</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.values-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin:28px 0}
+.val-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px 10px;text-align:center;transition:border-color .2s,transform .2s}
+.val-item:hover{border-color:rgba(255,255,255,.13);transform:translateY(-2px)}
+.val-item span{display:block;font-size:20px;margin-bottom:8px}
+.val-item p{font-size:11px;font-weight:600;color:var(--text2);letter-spacing:.5px;text-transform:uppercase}
+.kvk-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:28px 0}
+.kvk-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+.kvk-card:hover{transform:translateY(-2px)}
+.kvk-card::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;opacity:0;transition:opacity .2s}
+.kvk-card:hover::after{opacity:1}
+.kvk-card.p1:hover{border-color:rgba(126,184,247,.3)}.kvk-card.p1::after{background:linear-gradient(to right,transparent,var(--blue),transparent)}
+.kvk-card.p2:hover{border-color:rgba(167,139,250,.3)}.kvk-card.p2::after{background:linear-gradient(to right,transparent,var(--violet),transparent)}
+.kvk-card.p3:hover{border-color:rgba(251,191,36,.3)}.kvk-card.p3::after{background:linear-gradient(to right,transparent,var(--gold),transparent)}
+.kvk-phase{font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:10px}
+.kvk-ratio{font-family:var(--font-h);font-size:42px;font-weight:800;line-height:1;margin-bottom:10px;opacity:.18}
+.kvk-card.p1 .kvk-ratio{color:var(--blue)}.kvk-card.p2 .kvk-ratio{color:var(--violet)}.kvk-card.p3 .kvk-ratio{color:var(--gold)}
+.kvk-card h3{font-family:var(--font-h);font-size:14px;font-weight:700;margin-bottom:10px}
+.kvk-card.p1 h3{color:var(--blue)}.kvk-card.p2 h3{color:var(--violet)}.kvk-card.p3 h3{color:var(--gold)}
+.kvk-card p{font-size:13px;color:var(--text2);line-height:1.65}
+.closing{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:52px 40px;text-align:center;position:relative;overflow:hidden}
+.closing::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--blue),var(--violet),transparent)}
+.closing::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--violet),var(--blue),transparent)}
+.closing .body{font-size:15px;color:var(--text2);line-height:1.8;max-width:600px;margin:0 auto 24px}
+.closing .final{font-family:var(--font-h);font-size:clamp(18px,3vw,28px);font-weight:800;letter-spacing:-.3px;background:linear-gradient(135deg,var(--text1),var(--blue),var(--violet));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+@media(max-width:768px){.closing{padding:32px 18px}}
+</style>
+</head>
+<body>
+<canvas id="stars-canvas"></canvas><div id="site-nav"></div>
+<div class="page">
+  <div class="page-banner">
+    <p class="page-tag">01 — Project Vision</p>
+    <h1>Our <em>Journey</em></h1>
+    <p class="lead">Every great kingdom begins with intent. Ours is not just to rise — but to ascend beyond the ordinary.</p>
+  </div>
+  <div class="page-content">
+    <div class="reveal"><p class="sec-tag">The Foundation</p><h2 class="sec-title">What Space Born <em>Is</em></h2></div>
+    <p class="prose reveal">We are not here for temporary wins or hollow glory. We are here to forge a lasting celestial legacy — <strong>a kingdom built on discipline, structure, and relentless ambition</strong> — where every action has purpose and every member contributes to something greater than themselves.</p>
+    <div class="pull-quote reveal"><p>We do not rely on reckless risks or empty promises. We move with <span>clarity, patience, and precision.</span> Our victories will not come from chaos — but from control.</p></div>
+    <p class="prose reveal">This is not a kingdom where a few shine and others follow. This is a system where <strong>every fighter matters</strong> — where effort is visible, and success is shared. There will be <strong>no room for ego-driven conflict, unnecessary drama, or favoritism.</strong></p>
+    <div class="values-wrap reveal">
+      <div class="val-item"><span>🎯</span><p>Discipline</p></div>
+      <div class="val-item"><span>🏗️</span><p>Structure</p></div>
+      <div class="val-item"><span>🔥</span><p>Ambition</p></div>
+      <div class="val-item"><span>🤝</span><p>Unity</p></div>
+      <div class="val-item"><span>⚖️</span><p>Accountability</p></div>
+      <div class="val-item"><span>🌌</span><p>Precision</p></div>
+    </div>
+    <hr class="div">
+    <div class="reveal"><p class="sec-tag">KvK Philosophy</p><h2 class="sec-title">Space Born's KvK <em>Vision</em></h2></div>
+    <p class="prose reveal">From the very beginning, our path will not be easy — and that is by design. Every setback will be studied, every loss refined into strategy — because this kingdom is guided by <strong>experience, planning, and leaders who understand the art of war.</strong></p>
+    <div class="kvk-grid">
+      <div class="kvk-card p1 reveal"><p class="kvk-phase">Phase 1 — KvK 1</p><div class="kvk-ratio">1v3</div><h3>Test Our Limits</h3><p>Two dominant core alliances, a third elite force, and a structured support system. Coordination over chaos.</p></div>
+      <div class="kvk-card p2 reveal"><p class="kvk-phase">Phase 2 — KvK 2</p><div class="kvk-ratio">2v6</div><h3>Refined By Battle</h3><p>We do not fear pressure — we adapt to it. Every loss becomes a lesson. We enter sharper and more deadly.</p></div>
+      <div class="kvk-card p3 reveal"><p class="kvk-phase">Phase 3 — Season of Conquest</p><div class="kvk-ratio">∞</div><h3>Final Form</h3><p>Only those who meet the standard advance. From this point — we are no longer building. We are dominating.</p></div>
+    </div>
+    <div class="pull-quote violet reveal"><p>We rise not as individuals — but as a <span>single, coordinated force.</span></p></div>
+    <hr class="div">
+    <div class="reveal"><p class="sec-tag">Long-Term Destination</p><h2 class="sec-title">Where Space Born <em>Belongs</em></h2></div>
+    <p class="prose reveal">Our long-term goal is clear: to stand among the <strong>most respected and recognized kingdoms in Rise of Kingdoms</strong> and to carve our path toward Imperium.</p>
+    <p class="prose reveal">This kingdom will be defined by the consistency of its members, the discipline of its leadership, and the commitment of its officers. We offer a <strong>system built on fairness, growth, and opportunity</strong>. A kingdom where loyalty is valued, effort is rewarded, and ambition is cultivated.</p>
+    <hr class="div">
+    <div class="closing reveal">
+      <p class="body">Together, we are not building just another project. To prove that with the right structure, the right mindset, and the right people — a kingdom can rise beyond expectation and leave its mark on the game.</p>
+      <p class="final">We Are Building a Celestial Dominion.</p>
+    </div>
+    <div class="reveal" style="text-align:center;padding-top:36px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="leadership.html" class="btn btn-primary">Meet the Leadership →</a>
+      <a href="index.html" class="btn btn-ghost">← Back to Home</a>
+    </div>
+  </div>
+</div>
+<footer><p class="f-logo">Space Born</p><p>Rise of Kingdoms · Kingdom Restart Project</p></footer>
+<script src="data.js"></script><script src="nav.js"></script><script src="main.js"></script>
+</body></html>

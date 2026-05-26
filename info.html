@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Info & Rules — Space Born</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.mbox{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px 32px;position:relative;overflow:hidden;margin-bottom:10px}
+.mbox::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--violet),transparent)}
+.mbox p{font-size:15px;color:var(--text2);line-height:1.85;margin-bottom:10px}
+.mbox p:last-child{margin-bottom:0}
+.mbox strong{color:var(--text1);font-weight:600}
+.mbox .hi{font-family:var(--font-h);font-size:15px;font-weight:600;color:var(--blue);margin-top:14px!important}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:24px 0}
+.diff-c{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.diff-c h4{font-family:var(--font-h);font-size:13px;font-weight:700;color:var(--blue);margin-bottom:13px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.diff-c ul{list-style:none;padding:0}
+.diff-c li{font-size:13px;color:var(--text2);line-height:1.65;padding-left:13px;position:relative;margin-bottom:8px}
+.diff-c li::before{content:'›';position:absolute;left:0;color:var(--blue);font-weight:700}
+.diff-c li strong{color:var(--text1);font-weight:600}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:36px}
+.stat-b{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px 14px;text-align:center}
+.stat-l{font-family:var(--font-m);font-size:8px;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:7px}
+.stat-v{font-family:var(--font-h);font-size:17px;font-weight:700;color:var(--blue)}
+.stat-v.m{color:var(--text3);font-size:12px;font-weight:500;font-family:var(--font-b);font-style:italic}
+.rules-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.rule-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px}
+.rule-block h3{font-family:var(--font-h);font-size:13px;font-weight:700;color:var(--text1);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--border)}
+.rule-item{display:flex;gap:9px;margin-bottom:10px;align-items:flex-start}
+.rule-dot{width:4px;height:4px;border-radius:50%;background:var(--blue);margin-top:8px;flex-shrink:0}
+.rule-item p{font-size:13px;color:var(--text2);line-height:1.65}
+.rule-item strong{color:var(--text1);font-weight:600}
+@media(max-width:768px){.diff-grid,.rules-grid{grid-template-columns:1fr}.mbox{padding:22px 16px}}
+</style>
+</head>
+<body>
+<canvas id="stars-canvas"></canvas><div id="site-nav"></div>
+<div class="page">
+  <div class="page-banner">
+    <p class="page-tag">04 — Info & Rules</p>
+    <h1>About <em>Space Born</em></h1>
+    <p class="lead">Who we are, what drives us, and how we operate. The foundation of everything we're building.</p>
+  </div>
+  <div class="page-content">
+    <div class="reveal"><p class="sec-tag">Who We Are</p><h2 class="sec-title">About <em>Space Born</em></h2></div>
+    <p class="prose reveal"><strong>Space Born is not a random project built on hype.</strong> It is led by experienced former kings, officers, and kingdom builders who have already been through the full Rise of Kingdoms cycle — from early-game growth to high-level KvK and long-term kingdom management.</p>
+    <p class="prose reveal"><strong>We've seen what works.</strong> We've also seen <strong>what destroys kingdoms</strong> — poor leadership, favoritism, lack of structure, and short-term thinking. This project exists because we wanted to build something better.</p>
+    <p class="prose reveal">Our goal: a <strong>well-structured, competitive, and stable kingdom</strong> where players are not just used — but <strong>developed, organized, and valued.</strong></p>
+    <hr class="div">
+    <div class="reveal"><p class="sec-tag">Why We're Here</p><h2 class="sec-title">Our <em>Motivation</em></h2></div>
+    <div class="mbox reveal">
+      <p><strong>Most kingdoms fail</strong> not because of strength — <strong>but because of mismanagement and ego.</strong></p>
+      <p>We built Space Born to change that. A place where <strong>discipline matters more than noise.</strong> Where <strong>effort is recognized, not ignored.</strong> Where <strong>leadership is active, accountable, and experienced.</strong></p>
+      <p>And where every member <strong>understands their role</strong> in the bigger picture.</p>
+      <p class="hi">We're not chasing unrealistic promises. We're building something sustainable, competitive, and respected.</p>
+    </div>
+    <hr class="div">
+    <div class="reveal"><p class="sec-tag">Our Approach</p><h2 class="sec-title">What Makes Us <em>Different</em></h2><p class="sec-lead">We don't believe in "figure it out later" leadership. Space Born runs on structure, planning, and clarity.</p></div>
+    <div class="diff-grid reveal">
+      <div class="diff-c"><h4>How We Operate</h4><ul><li>Clear <strong>kingdom direction from Day 1</strong></li><li>Organized <strong>alliance hierarchy and responsibilities</strong></li><li>Focus on <strong>KvK readiness</strong>, not just early power spikes</li><li>Strong <strong>communication between leadership and members</strong></li></ul></div>
+      <div class="diff-c"><h4>What We Build</h4><ul><li>A place where <strong>players grow together</strong></li><li>A kingdom where <strong>loyalty actually matters</strong></li><li>Success <strong>shared across the entire kingdom</strong></li><li>A community that feels like <strong>more than just orders and war</strong></li></ul></div>
+    </div>
+    <hr class="div">
+    <div class="reveal"><p class="sec-tag">Server Details</p><h2 class="sec-title">Mission <em>Parameters</em></h2></div>
+    <div class="stats-row reveal" id="sstats"></div>
+    <hr class="div">
+    <div class="reveal"><p class="sec-tag">Kingdom Laws</p><h2 class="sec-title">Rules & <em>Protocols</em></h2><p class="sec-lead">These laws are enforced without exception by leadership.</p></div>
+    <div class="rules-grid reveal">
+      <div class="rule-block"><h3>Combat Laws</h3>
+        <div class="rule-item"><div class="rule-dot"></div><p><strong>Zero tolerance</strong> for hitting kingdom members without official war declaration.</p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>R4/R5 rally participation is <strong>mandatory</strong> during KvK season.</p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>All diplomacy through official channels only — never DM enemies directly.</p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>Tile hitting allies is a bannable offense during active KvK.</p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>City burning of allies results in <strong>immediate removal.</strong></p></div>
+      </div>
+      <div class="rule-block"><h3>Discord & Communication</h3>
+        <div class="rule-item"><div class="rule-dot"></div><p>Discord is <strong>mandatory</strong> — all critical info and war calls posted there only.</p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>Mark yourself with your IGN + alliance tag in the Discord server.</p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>War calls require <strong>immediate acknowledgement.</strong></p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>Leaking kingdom information results in <strong>permanent removal.</strong></p></div>
+      </div>
+      <div class="rule-block"><h3>Growth & Resources</h3>
+        <div class="rule-item"><div class="rule-dot"></div><p>New players follow the kingdom-approved build guide during growth phase.</p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>Resource sharing protocols distributed via Discord.</p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>Kingdom pass requirements outlined per alliance tier.</p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>Rune usage and tech contribution requirements posted pre-KvK.</p></div>
+      </div>
+      <div class="rule-block"><h3>Activity & Commitment</h3>
+        <div class="rule-item"><div class="rule-dot"></div><p>Minimum activity requirements vary by tier — posted in Discord.</p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>Extended inactivity without notice may result in demotion or removal.</p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>Alliance contribution to kingdom events is tracked and expected.</p></div>
+        <div class="rule-item"><div class="rule-dot"></div><p>Leadership reviews performance regularly to maintain kingdom quality.</p></div>
+      </div>
+    </div>
+    <hr class="div">
+    <div class="reveal" style="text-align:center;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="join.html" class="btn btn-primary">Join the Fleet →</a>
+      <a href="index.html" class="btn btn-ghost">← Back to Home</a>
+    </div>
+  </div>
+</div>
+<footer><p class="f-logo">Space Born</p><p>Rise of Kingdoms · Kingdom Restart Project</p></footer>
+<script src="data.js"></script><script src="nav.js"></script><script src="main.js"></script>
+<script>
+const k=SPACEBORN.kingdom;
+const s=[{l:'Server #',v:k.serverNumber},{l:'Launch Date',v:k.launchDate},{l:'Alliances',v:'3 Main + 3 Support'},{l:'Server Type',v:k.serverType}];
+document.getElementById('sstats').innerHTML=s.map(x=>`<div class="stat-b"><p class="stat-l">${x.l}</p><p class="stat-v ${x.v==='TBD'?'m':''}">${x.v==='TBD'?'Pending':x.v}</p></div>`).join('');
+</script>
+</body></html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alliances — Space Born</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.tier-hd{display:flex;align-items:center;gap:14px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.tier-meta{font-family:var(--font-m);font-size:10px;color:var(--text3);letter-spacing:1px}
+.tier-desc{font-size:15px;color:var(--text2);line-height:1.75;max-width:680px;margin-bottom:20px}
+.al-stack{display:flex;flex-direction:column;gap:12px;margin-bottom:48px}
+.al-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:24px 28px;position:relative;overflow:hidden;transition:border-color .2s,transform .2s}
+.al-card:hover{transform:translateY(-2px)}
+.al-card.main:hover{border-color:rgba(126,184,247,.3)}
+.al-card.support:hover{border-color:rgba(167,139,250,.3)}
+.al-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;opacity:0;transition:opacity .2s}
+.al-card:hover::before{opacity:1}
+.al-card.main::before{background:linear-gradient(to right,transparent,var(--blue),transparent)}
+.al-card.support::before{background:linear-gradient(to right,transparent,var(--violet),transparent)}
+.al-top{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:16px;flex-wrap:wrap}
+.al-left{flex:1;min-width:200px}
+.al-tag{font-family:var(--font-m);font-size:16px;font-weight:700;letter-spacing:3px;padding:4px 14px;border-radius:var(--r-sm);display:inline-block;margin-bottom:12px}
+.al-card.main .al-tag{background:var(--blue-dim);border:1px solid rgba(126,184,247,.2);color:var(--blue)}
+.al-card.support .al-tag{background:var(--violet-dim);border:1px solid rgba(167,139,250,.2);color:var(--violet)}
+.al-name{font-family:var(--font-h);font-size:15px;font-weight:700;color:var(--text1);margin-bottom:7px}
+.al-desc{font-size:13px;color:var(--text2);line-height:1.65;max-width:520px}
+.al-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;min-width:180px}
+.al-ml{font-family:var(--font-m);font-size:8px;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:2px}
+.al-mv{font-size:13px;color:var(--text2);font-weight:500}
+.al-mv.tbd{color:var(--text3);font-style:italic;font-size:12px}
+.al-bottom{display:flex;gap:6px;flex-wrap:wrap;padding-top:14px;border-top:1px solid var(--border)}
+.al-pill{font-size:11px;font-weight:500;padding:2px 10px;border-radius:999px}
+.al-card.main .al-pill{background:rgba(126,184,247,.08);border:1px solid rgba(126,184,247,.14);color:var(--blue)}
+.al-card.support .al-pill{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.14);color:var(--violet)}
+@media(max-width:768px){.al-top{flex-direction:column}.al-card{padding:18px 16px}}
+</style>
+</head>
+<body>
+<canvas id="stars-canvas"></canvas><div id="site-nav"></div>
+<div class="page">
+  <div class="page-banner">
+    <p class="page-tag">03 — Alliances</p>
+    <h1>The <em>Fleet</em></h1>
+    <p class="lead">Space Born's alliance ecosystem — three main war guilds and three support alliances forming the complete kingdom structure.</p>
+  </div>
+  <div class="page-content">
+    <div class="reveal">
+      <div class="tier-hd"><span class="badge badge-blue">Main Alliances</span><span class="tier-meta">3 Guilds · War Focused · KvK Mandatory</span></div>
+      <p class="tier-desc">Our three main alliances form the combat core of Space Born. All three operate under direct coordination from the War Council and High Command.</p>
+      <div class="al-stack" id="main-al"></div>
+    </div>
+    <hr class="div">
+    <div class="reveal">
+      <div class="tier-hd"><span class="badge badge-violet">Support Alliances</span><span class="tier-meta">3 Guilds · Growth & Resources</span></div>
+      <p class="tier-desc">The backbone of the kingdom's economy and growth. They keep main alliances fueled, house developing players, and maintain the resource infrastructure.</p>
+      <div class="al-stack" id="support-al"></div>
+    </div>
+    <hr class="div">
+    <div class="reveal"><p class="sec-tag">Diplomacy</p><h2 class="sec-title">NAP & <em>Allied Kingdoms</em></h2><p class="sec-lead">Allied kingdoms and non-aggression pacts managed by our Diplomacy Council.</p></div>
+    <div class="placeholder reveal"><p>NAP list & allied kingdoms — confirmed post-launch</p></div>
+    <hr class="div">
+    <div class="reveal" style="text-align:center;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+      <a href="sellers.html" class="btn btn-primary">RSS Sellers →</a>
+      <a href="index.html" class="btn btn-ghost">← Back to Home</a>
+    </div>
+  </div>
+</div>
+<footer><p class="f-logo">Space Born</p><p>Rise of Kingdoms · Kingdom Restart Project</p></footer>
+<script src="data.js"></script><script src="nav.js"></script><script src="main.js"></script>
+<script>
+function renderAl(list,id){
+  document.getElementById(id).innerHTML=list.map(a=>`
+    <div class="al-card ${a.type}">
+      <div class="al-top">
+        <div class="al-left">
+          <span class="al-tag">${a.tag==='TBD'?'[ TBD ]':a.tag}</span>
+          <p class="al-name">${a.name}</p>
+          <p class="al-desc">${a.desc}</p>
+        </div>
+        <div class="al-meta">
+          <div><p class="al-ml">R5 Leader</p><p class="al-mv ${a.r5==='TBD'?'tbd':''}">${a.r5==='TBD'?'Pending':a.r5}</p></div>
+          <div><p class="al-ml">Min Power</p><p class="al-mv ${a.minPower==='TBD'?'tbd':''}">${a.minPower==='TBD'?'TBD':a.minPower}</p></div>
+          <div><p class="al-ml">KvK</p><p class="al-mv">${a.kvk}</p></div>
+          <div><p class="al-ml">Tag</p><p class="al-mv ${a.tag==='TBD'?'tbd':''}">${a.tag==='TBD'?'Pending':a.tag}</p></div>
+        </div>
+      </div>
+      <div class="al-bottom">${a.features.map(f=>`<span class="al-pill">${f}</span>`).join('')}</div>
+    </div>`).join('');
+}
+renderAl(SPACEBORN.alliances.filter(a=>a.type==='main'),'main-al');
+renderAl(SPACEBORN.alliances.filter(a=>a.type==='support'),'support-al');
+</script>
+</body></html>
